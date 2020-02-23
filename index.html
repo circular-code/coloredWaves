@@ -7,6 +7,14 @@
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
+    <div id="ui">
+      <label for="amplitude">amplitude</label>
+      <input name="amplitude" type="range" min="1" max="1000" value="500" class="slider" id="amplitude">
+      <label for="waveLength">waveLength</label>
+      <input name="waveLength" type="range" min="1" max="1000" value="500" class="slider" id="waveLength">
+      <label for="frequency">frequency</label>
+      <input name="frequency" type="range" min="1" max="100" value="50" class="slider" id="frequency">
+    </div>
     <div id="canvas"></div>
     <script src="app.js"></script>
     <script>
