@@ -10,18 +10,28 @@ var gui = {
     amplitude: Math.random() * 200,
     waveLength: Math.random() / 100,
     frequency: Math.random() * 1,
+    hue: 125,
+    saturation: 50,
+    lightness: 50,
 };
 
 document.getElementById('amplitude').addEventListener('change', function(e){
     gui.amplitude = Math.random() * +e.srcElement.value;
 });
-
 document.getElementById('frequency').addEventListener('change', function(e){
     gui.frequency = Math.random() * +e.srcElement.value / 10;
 });
-
 document.getElementById('waveLength').addEventListener('change', function(e){
     gui.waveLength = Math.random() / +e.srcElement.value;
+});
+document.getElementById('hue').addEventListener('change', function(e){
+    gui.hue = +e.srcElement.value;
+});
+document.getElementById('saturation').addEventListener('change', function(e){
+    gui.saturation = +e.srcElement.value;
+});
+document.getElementById('lightness').addEventListener('change', function(e){
+    gui.lightness = +e.srcElement.value;
 });
 
 function runAnimation(target) {
@@ -43,12 +53,11 @@ function runAnimation(target) {
     });
 
     class Wave {
-        constructor (x, y, waveLength, amplitude, color, frequency) {
+        constructor (x, y, waveLength, amplitude, frequency) {
             this.x = x;
             this.y = y;
             this.waveLength = waveLength;
             this.amplitude = amplitude;
-            this.color = color;
             this.frequency = frequency;
             this.moveBy = 0;
         }
@@ -60,7 +69,7 @@ function runAnimation(target) {
             for (let i = 0; i < width; i++)
                 ctx.lineTo(i, this.y + Math.sin(i * (this.waveLength + gui.waveLength) + this.moveBy) * (this.amplitude + gui.amplitude) * Math.sin(this.moveBy));
 
-            ctx.strokeStyle = this.color;
+            ctx.strokeStyle = `hsl(${gui.hue},${gui.saturation}%,${gui.lightness}%)`;
             ctx.stroke();
         }
 
@@ -70,8 +79,8 @@ function runAnimation(target) {
     }
 
     var waves = [];
-    for (let i = 0, amount = 10; i < amount; i++)
-        waves.push(new Wave(0, canvas.height/2, Math.random() / 250, Math.random() * 200, getRandomRGB(255,0,125) , Math.random()));
+    for (let i = 0, amount = 1; i < amount; i++)
+        waves.push(new Wave(0, canvas.height/2, Math.random() / 250, Math.random() * 200, Math.random()));
 
     var time = Date.now();
 
@@ -79,7 +88,8 @@ function runAnimation(target) {
 
         var timeDelta = (now - time) / 1000;
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(0,0,0,0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         //prevent huge jumps of dot movement when leaving site
         if (timeDelta >= 0.05 || timeDelta <= 0)

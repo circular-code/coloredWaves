@@ -7,13 +7,19 @@
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-    <div id="ui">
+    <div id="gui">
       <label for="amplitude">amplitude</label>
       <input name="amplitude" type="range" min="1" max="1000" value="500" class="slider" id="amplitude">
       <label for="waveLength">waveLength</label>
       <input name="waveLength" type="range" min="1" max="1000" value="500" class="slider" id="waveLength">
       <label for="frequency">frequency</label>
       <input name="frequency" type="range" min="1" max="100" value="50" class="slider" id="frequency">
+      <label for="hue">hue</label>
+      <input name="hue" type="range" min="1" max="255" value="125" class="slider" id="hue">
+      <label for="saturation">saturation</label>
+      <input name="saturation" type="range" min="1" max="100" value="50" class="slider" id="saturation">
+      <label for="lightness">lightness</label>
+      <input name="lightness" type="range" min="1" max="100" value="50" class="slider" id="lightness">
     </div>
     <div id="canvas"></div>
     <script src="app.js"></script>
