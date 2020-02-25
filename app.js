@@ -6,35 +6,7 @@ function getRandomRGB(r,g,b) {
    return 'rgba(' + Math.random() * r + ',' + Math.random() * g + ',' + Math.random() * b + ',0.3)';
 }
 
-var gui = {
-    amplitude: Math.random() * 200,
-    waveLength: Math.random() / 100,
-    frequency: Math.random() * 1,
-    hue: 125,
-    saturation: 50,
-    lightness: 50,
-};
-
-document.getElementById('amplitude').addEventListener('change', function(e){
-    gui.amplitude = Math.random() * +e.srcElement.value;
-});
-document.getElementById('frequency').addEventListener('change', function(e){
-    gui.frequency = Math.random() * +e.srcElement.value / 10;
-});
-document.getElementById('waveLength').addEventListener('change', function(e){
-    gui.waveLength = Math.random() / +e.srcElement.value;
-});
-document.getElementById('hue').addEventListener('change', function(e){
-    gui.hue = +e.srcElement.value;
-});
-document.getElementById('saturation').addEventListener('change', function(e){
-    gui.saturation = +e.srcElement.value;
-});
-document.getElementById('lightness').addEventListener('change', function(e){
-    gui.lightness = +e.srcElement.value;
-});
-
-function runAnimation(target) {
+function runAnimation(target, live) {
     'use strict';
 
     var canvas = document.createElement("canvas");
@@ -43,6 +15,36 @@ function runAnimation(target) {
     canvas.width = target.clientWidth;
     canvas.height = target.clientHeight;
     ctx.lineWidth = 2;
+   
+    var gui = {
+        amplitude: Math.random() * 200,
+        waveLength: Math.random() / 100,
+        frequency: Math.random() * 1,
+        hue: 125,
+        saturation: 50,
+        lightness: 50,
+    };
+
+    if (!live) {
+        document.getElementById('amplitude').addEventListener('change', function(e){
+            gui.amplitude = Math.random() * +e.srcElement.value;
+        });
+        document.getElementById('frequency').addEventListener('change', function(e){
+            gui.frequency = Math.random() * +e.srcElement.value / 10;
+        });
+        document.getElementById('waveLength').addEventListener('change', function(e){
+            gui.waveLength = Math.random() / +e.srcElement.value;
+        });
+        document.getElementById('hue').addEventListener('change', function(e){
+            gui.hue = +e.srcElement.value;
+        });
+        document.getElementById('saturation').addEventListener('change', function(e){
+            gui.saturation = +e.srcElement.value;
+        });
+        document.getElementById('lightness').addEventListener('change', function(e){
+            gui.lightness = +e.srcElement.value;
+        });
+    }
 
     // adjust to vertical scrollbar
     var width = window.document.body.clientWidth < canvas.width ? window.document.body.clientWidth : canvas.width;
